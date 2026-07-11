@@ -22,6 +22,9 @@ import (
 	"github.com/pbarrett520/jane-pdf-renamer-v2/web"
 )
 
+// version is stamped at build time via -ldflags "-X main.version=v1.2.3"
+var version = "dev"
+
 func main() {
 	log.SetFlags(log.Ldate | log.Ltime)
 
@@ -32,7 +35,13 @@ func main() {
 		"Output filename format: current_discharge, appt_billing, appt_billing_eval, appt_billing_progress, appt_billing_discharge")
 	port := flag.Int("port", 8080, "Port for web server")
 	noBrowser := flag.Bool("no-browser", false, "Don't automatically open browser")
+	showVersion := flag.Bool("version", false, "Print version and exit")
 	flag.Parse()
+
+	if *showVersion {
+		fmt.Println(version)
+		return
+	}
 
 	fileFormat := core.ParseFileFormat(*format)
 

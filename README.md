@@ -116,6 +116,21 @@ PHI) and skip automatically when absent.
 
 ## 📦 Distribution Builds
 
+### Releases (recommended)
+
+Pushing a version tag triggers a GitHub Actions workflow that tests,
+cross-compiles all platforms, and publishes a release with the binaries
+attached:
+
+```bash
+git tag v1.0.1 && git push origin v1.0.1
+```
+
+Download the latest build any time from the
+[releases page](https://github.com/pbarrett520/jane-pdf-renamer-v2/releases/latest).
+
+### Local builds
+
 ```bash
 ./build.sh
 ```
@@ -123,7 +138,7 @@ PHI) and skip automatically when absent.
 Produces in `dist/`: `JanePDFRenamer.exe` (Windows x64),
 `JanePDFRenamer-mac-applesilicon`, `JanePDFRenamer-mac-intel`, and
 `JanePDFRenamer-linux`. Each is a self-contained ~20 MB binary — send the
-file, double-click, done.
+file, double-click, done. `-version` prints the stamped version of any build.
 
 ### macOS Gatekeeper
 
