@@ -148,5 +148,5 @@ Files arriving via AirDrop or USB drive typically skip quarantine entirely.
 
 ## 📄 License
 
-Internal use at medical offices. All patient data remains local and is never
-transmitted.
+Apache 2.0 — see [LICENSE](LICENSE). All patient data remains local and is
+never transmitted.
