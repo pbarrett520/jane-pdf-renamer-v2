@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jane PDF Renamer</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css?v=3">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Compact Header -->
+        <header class="app-header">
+            <h1>⚕️ Jane PDF Renamer</h1>
+            <span class="hipaa-badge">HIPAA COMPLIANT</span>
+        </header>
+        
+        <!-- Main 3-Column Layout -->
+        <main class="main-grid">
+            <!-- Left: Format Options -->
+            <section class="panel panel-formats">
+                <h2 class="panel-title">Format</h2>
+                <div class="format-options" id="format-options">
+                    <label class="format-option" data-format="current_discharge">
+                        <input type="radio" name="format" value="current_discharge">
+                        <span class="radio-dot"></span>
+                        <span class="format-text">
+                            <span class="format-name">Chart Note</span>
+                            <span class="format-badge today">TODAY</span>
+                        </span>
+                    </label>
+                    <label class="format-option selected" data-format="appt_billing">
+                        <input type="radio" name="format" value="appt_billing" checked>
+                        <span class="radio-dot"></span>
+                        <span class="format-text">
+                            <span class="format-name">PT Note</span>
+                            <span class="format-badge appt">APPT</span>
+                        </span>
+                    </label>
+                    <label class="format-option" data-format="appt_billing_eval">
+                        <input type="radio" name="format" value="appt_billing_eval">
+                        <span class="radio-dot"></span>
+                        <span class="format-text">
+                            <span class="format-name">Eval Note</span>
+                            <span class="format-badge appt">APPT</span>
+                        </span>
+                    </label>
+                    <label class="format-option" data-format="appt_billing_progress">
+                        <input type="radio" name="format" value="appt_billing_progress">
+                        <span class="radio-dot"></span>
+                        <span class="format-text">
+                            <span class="format-name">Progress Note</span>
+                            <span class="format-badge appt">APPT</span>
+                        </span>
+                    </label>
+                    <label class="format-option" data-format="appt_billing_discharge">
+                        <input type="radio" name="format" value="appt_billing_discharge">
+                        <span class="radio-dot"></span>
+                        <span class="format-text">
+                            <span class="format-name">Discharge Note</span>
+                            <span class="format-badge appt">APPT</span>
+                        </span>
+                    </label>
+                </div>
+            </section>
+            
+            <!-- Center: Drop Zone -->
+            <section class="panel panel-upload">
+                <h2 class="panel-title">Drop PDF</h2>
+                <div class="drop-zone" id="drop-zone">
+                    <div class="drop-icon">📄</div>
+                    <p class="drop-text">Drop files here</p>
+                    <p class="drop-hint">or click to browse</p>
+                </div>
+                <input type="file" id="file-input" accept=".pdf" multiple>
+                
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p id="loading-text">Processing...</p>
+                    <p id="loading-progress"></p>
+                </div>
+            </section>
+            
+            <!-- Right: Output & Results -->
+            <section class="panel panel-output">
+                <h2 class="panel-title">Output</h2>
+                
+                <!-- Output Folder -->
+                <div class="output-folder">
+                    <div class="folder-row" id="folder-display">
+                        <span class="folder-icon">📁</span>
+                        <span class="folder-path" id="folder-name">{{.DefaultOutput}}</span>
+                    </div>
+                    <button class="btn-browse" id="btn-browse">Change</button>
+                </div>
+                <input type="hidden" id="output-folder" value="{{.DefaultOutput}}">
+                <p class="drop-hint" id="folder-hint">Default output folder is used unless changed.</p>
+                
+                <!-- Results List -->
+                <div class="results-container" id="results-card">
+                    <div class="results-list" id="results-list"></div>
+                </div>
+            </section>
+        </main>
+        
+        <!-- Review Form Modal -->
+        <div class="review-overlay" id="review-form">
+            <div class="review-modal">
+                <h2>⚠️ Manual Review</h2>
+                <p class="review-hint">Could not extract all information. Please verify:</p>
+                <input type="hidden" id="review-filename">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="review-first">First Name</label>
+                        <input type="text" id="review-first" placeholder="First">
+                    </div>
+                    <div class="form-group">
+                        <label for="review-last">Last Name</label>
+                        <input type="text" id="review-last" placeholder="Last">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="review-date">Date (MMDDYY)</label>
+                        <input type="text" id="review-date" placeholder="121825">
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="review-submit">Rename File</button>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="app-footer">
+            🔒 All processing happens locally
+        </footer>
+    </div>
+    
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

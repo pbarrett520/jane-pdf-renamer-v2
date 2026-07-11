@@ -1,0 +1,19 @@
+# Build outputs
+dist/
+jane-pdf-renamer
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+
+# Patient data — never commit PDFs (PHI)
+*.pdf
+
+# Legacy Python app archive
+python-legacy.tar.gz
