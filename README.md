@@ -140,17 +140,35 @@ Produces in `dist/`: `JanePDFRenamer.exe` (Windows x64),
 `JanePDFRenamer-linux`. Each is a self-contained ~20 MB binary — send the
 file, double-click, done. `-version` prints the stamped version of any build.
 
-### macOS Gatekeeper
+### Mac setup (one-time)
 
-The mac binaries are unsigned, so a *downloaded* copy is quarantined. Either
-right-click → Open (twice), or:
+The mac binaries are unsigned, so a downloaded copy is quarantined by
+Gatekeeper and loses its executable bit in transit. After downloading, paste
+this into Terminal:
 
 ```bash
-xattr -d com.apple.quarantine ./JanePDFRenamer-mac-applesilicon
-chmod +x ./JanePDFRenamer-mac-applesilicon
+cd ~/Downloads
+chmod +x JanePDFRenamer-mac-applesilicon
+xattr -d com.apple.quarantine JanePDFRenamer-mac-applesilicon
+./JanePDFRenamer-mac-applesilicon
 ```
 
-Files arriving via AirDrop or USB drive typically skip quarantine entirely.
+(Use `JanePDFRenamer-mac-intel` on an Intel Mac.)
+
+This is one-time per downloaded file: once it has run, move it anywhere
+(Desktop, Applications) and double-click it from then on. Repeat the setup
+only when downloading a new version. Files copied from a USB drive typically
+skip quarantine entirely, so a prepared binary handed over on a stick may
+just run.
+
+On macOS 15 (Sequoia) and later, the old right-click → Open bypass no longer
+works for unsigned software; if you skip the `xattr` line, approve the app
+under System Settings → Privacy & Security → "Open Anyway" instead.
+
+### Windows note
+
+First launch of a downloaded `.exe` may show a SmartScreen warning:
+**More info → Run anyway**. One-time per version.
 
 ## 🐛 Troubleshooting
 
